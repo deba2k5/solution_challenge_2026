@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+python-dotenv
+groq
+py-algorand-sdk
+pydantic
+python-multipart
+requests
+motor
+pymongo

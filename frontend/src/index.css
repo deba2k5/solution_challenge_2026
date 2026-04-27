@@ -1,0 +1,171 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;800;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================
+   AEGISNET-X  —  DESIGN SYSTEM
+   Neo-Brutalist · Light (Yellow/Brown) & Dark (Purple/Black)
+   ============================================================ */
+
+@layer base {
+
+  :root {
+    --bg-color: #fafafa;
+    --text-main: #000000;
+    --border-color: #000000;
+    --shadow-color: #000000;
+    --card-bg: #ffffff;
+    --primary: #FACC15;
+    --primary-text: #000000;
+    --secondary: #78350F;
+    --accent-red: #EF4444;
+    --accent-green: #22C55E;
+    
+    --shadow-sm: 3px 3px 0px var(--shadow-color);
+    --shadow-md: 6px 6px 0px var(--shadow-color);
+    --shadow-lg: 10px 10px 0px var(--shadow-color);
+  }
+
+  .dark {
+    --bg-color: #000000;
+    --text-main: #ffffff;
+    --border-color: #A855F7; /* Purple */
+    --shadow-color: #A855F7; /* Purple */
+    --card-bg: #0a0a0a;
+    --primary: #A855F7;
+    --primary-text: #ffffff;
+    --secondary: #581C87;
+    --accent-red: #EF4444;
+    --accent-green: #22C55E;
+  }
+}
+
+/* ---------- Base Reset ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  font-family: 'Inter', sans-serif;
+}
+
+body {
+  margin: 0;
+  overflow-x: hidden;
+  background-color: var(--bg-color);
+  color: var(--text-main);
+}
+
+/* Blueprint grid */
+.grid-bg {
+  background-image:
+    linear-gradient(var(--border-color) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border-color) 1px, transparent 1px);
+  background-size: 40px 40px;
+  background-attachment: fixed;
+  opacity: 0.04;
+}
+
+.dark .grid-bg {
+  opacity: 0.15;
+}
+
+#root { min-height: 100vh; }
+
+/* ---------- Scrollbar ---------- */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--bg-color); }
+::-webkit-scrollbar-thumb { background: var(--text-main); border: 2px solid var(--bg-color); }
+::-webkit-scrollbar-thumb:hover { background: var(--primary); }
+
+/* ---------- Typography ---------- */
+h1,h2,h3,h4,h5,h6 { font-family: 'Outfit', sans-serif; }
+.font-heading { font-family: 'Outfit', sans-serif !important; }
+.font-mono-custom { font-family: 'JetBrains Mono', ui-monospace, monospace !important; }
+
+/* ---------- Neo-Brutalist Components ---------- */
+@layer components {
+
+  .brutalist-card {
+    background-color: var(--card-bg);
+    border: 4px solid var(--border-color);
+    box-shadow: var(--shadow-lg);
+    transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease, background-color .15s ease;
+  }
+  .brutalist-card:hover {
+    transform: translate(-2px,-2px);
+    box-shadow: 12px 12px 0 var(--shadow-color);
+  }
+
+  .brutalist-btn {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 font-black uppercase cursor-pointer;
+    border: 4px solid var(--border-color);
+    font-family: 'Outfit', sans-serif;
+    box-shadow: var(--shadow-sm);
+    transition: transform .1s, box-shadow .1s, background-color .15s, border-color .15s;
+  }
+  .brutalist-btn:hover {
+    transform: translate(-2px,-2px);
+    box-shadow: 5px 5px 0 var(--shadow-color);
+  }
+  .brutalist-btn:active {
+    transform: translate(2px,2px);
+    box-shadow: none;
+  }
+
+  .btn-primary  { background-color: var(--primary); color: var(--primary-text); }
+  .btn-secondary { background-color: var(--secondary); color: #fff; }
+  .btn-inverse   { background-color: var(--text-main); color: var(--bg-color); }
+  .btn-red       { background-color: #EF4444; color: white; }
+
+  .brutalist-input {
+    @apply w-full px-4 py-3 font-bold outline-none;
+    border: 4px solid var(--border-color);
+    background-color: var(--card-bg);
+    color: var(--text-main);
+    font-family: 'Inter', sans-serif;
+    transition: background .15s, box-shadow .15s, border-color .15s;
+  }
+  .brutalist-input:focus {
+    box-shadow: 4px 4px 0 var(--shadow-color);
+  }
+
+  /* Status badges */
+  .badge-flagged   { @apply inline-flex items-center gap-1 px-3 py-1 bg-[#EF4444] text-white font-black text-xs uppercase; border: 2px solid var(--border-color); box-shadow: 2px 2px 0 var(--shadow-color); }
+  .badge-verified  { @apply inline-flex items-center gap-1 px-3 py-1 bg-[#22C55E] text-white font-black text-xs uppercase; border: 2px solid var(--border-color); box-shadow: 2px 2px 0 var(--shadow-color); }
+  .badge-pending   { background-color: var(--secondary); @apply inline-flex items-center gap-1 px-3 py-1 text-white font-black text-xs uppercase; border: 2px solid var(--border-color); box-shadow: 2px 2px 0 var(--shadow-color); }
+
+  /* Tactical terminal bar */
+  .terminal-bar {
+    background-color: var(--text-main);
+    color: var(--bg-color);
+    @apply flex items-center justify-between p-3;
+  }
+
+  /* Page layout wrapper */
+  .page-wrapper {
+    @apply pt-28 pb-12 px-4;
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+
+  /* Stat card */
+  .stat-card {
+    @apply brutalist-card p-6 flex flex-col gap-3;
+  }
+}
+
+/* ---------- Animations ---------- */
+@keyframes blink    { 0%,100%{opacity:1} 50%{opacity:0} }
+@keyframes fadeUp   { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:none} }
+@keyframes scanLine { 0%{background-position:0 0} 100%{background-position:0 100%} }
+
+.animate-blink   { animation: blink 1s step-end infinite; }
+.animate-fade-up { animation: fadeUp .4s ease both; }
+
+/* text-selection primary */
+::selection { background: var(--primary); color: var(--primary-text); }
+
+/* Prevent navbar overlap */
+.navbar-spacer { height: 80px; }
